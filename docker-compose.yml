@@ -12,7 +12,7 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data/
   backend:
-    image: andr2ei/taski_backend:latest
+    build: ./backend/
     env_file: .env
     volumes:
       - media:/app/media/
@@ -20,14 +20,14 @@ services:
     depends_on:
       - db
   frontend:
-    image: andr2ei/taski_frontend:latest
+    build: ./frontend/
     env_file: .env
     volumes:
       - static:/frontend_static/
     depends_on:
       - backend
   gateway:
-    image: andr2ei/taski_gateway:latest
+    build: ./nginx/
     env_file: .env
     ports:
       - 9090:80
